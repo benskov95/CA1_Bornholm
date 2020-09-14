@@ -26,6 +26,8 @@ public class JokeFacadeTest {
     public JokeFacadeTest() {
     }
 
+    /* moved test joke creation up here because creating new jokes
+        for each test method made the getRandom() method not work. */
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
@@ -33,6 +35,17 @@ public class JokeFacadeTest {
        j1 = new Joke("What's the best thing about Switzerland?", "I don't know, but the flag is a big plus", "Family-friendly", 5);
        j2 = new Joke("What's a quick way to get rid of a cold?", "Just stand in a corner, it's 90 degrees", "Math joke", 7);
        j3 = new Joke("Have you heard about the new restaurant called Karma?", "There's no menu; you get what you deserve", "Deadpan", 8);
+       
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(j1);
+            em.persist(j2);
+            em.persist(j3);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
     @AfterAll
@@ -41,17 +54,6 @@ public class JokeFacadeTest {
 
     @BeforeEach
     public void setUp() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(j1);
-            em.persist(j2);
-            em.persist(j3);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
     }
 
     @AfterEach
