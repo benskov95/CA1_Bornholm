@@ -64,5 +64,18 @@ public class JokeFacadeTest {
         List<Joke> jokes = facade.getAllJokes();
         assertEquals(expectedSize, jokes.size());
     }
+    
+    @Test
+    public void testGetJokeByID() {
+        Joke joke = facade.getJokeByID(j1.getId());
+        assertEquals(j1.getPunchLine(), joke.getPunchLine());
+    }
+    
+    @Test
+    public void testGetRandomJoke() {
+        Joke joke = facade.getRandomJoke();
+        int mustContainSomething = 5;
+        assertTrue(joke.getJoke().length() > mustContainSomething);
+    }
 
 }

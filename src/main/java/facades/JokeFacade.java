@@ -16,6 +16,12 @@ public class JokeFacade {
     
     private JokeFacade() {}
     
+    public static void main(String[] args) {
+        emf = Persistence.createEntityManagerFactory("pu");
+        instance = getJokeFacade(emf);
+        System.out.println(instance.getRandomJoke().getJoke());
+    }
+    
     
     public static JokeFacade getJokeFacade(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -56,12 +62,9 @@ public class JokeFacade {
     public Joke getRandomJoke() {
         List<Joke> referenceList = getAllJokes();
         Random random = new Random();
-        int randomID = random.nextInt(referenceList.size() + 1); // +1 so there is no 0.
+        int randomID = random.nextInt(referenceList.size());
+        randomID += 1; // +1 so it starts from 1.
         return getJokeByID(randomID);
     }
-    
-    
-    
-    
 
 }
