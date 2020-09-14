@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries ({
 @NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke"),
 @NamedQuery(name = "Joke.getAllJokes", query = "SELECT j from Joke j"),
-@NamedQuery(name = "Joke.getById", query = "SELECT j FROM Joke j WHERE j.id = :id")
+@NamedQuery(name = "Joke.getByID", query = "SELECT j FROM Joke j WHERE j.id = :id")
 })
 public class Joke implements Serializable {
 
@@ -23,16 +23,16 @@ public class Joke implements Serializable {
     
     private int id;
     private String joke;
-    private String author;
+    private String punchLine;
     private String type;
     private int devRating;
     
     public Joke() {
     }
 
-    public Joke(String joke, String author, String type, int devRating) {
+    public Joke(String joke, String punchLine, String type, int devRating) {
         this.joke = joke;
-        this.author = author;
+        this.punchLine = punchLine;
         this.type = type;
         this.devRating = devRating;
     }
@@ -53,12 +53,12 @@ public class Joke implements Serializable {
         this.joke = joke;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getPunchLine() {
+        return punchLine;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setPunchLine(String punchLine) {
+        this.punchLine = punchLine;
     }
 
     public String getType() {
