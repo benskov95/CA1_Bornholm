@@ -15,13 +15,7 @@ public class JokeFacade {
     private static EntityManagerFactory emf;
     
     private JokeFacade() {}
-    
-    public static void main(String[] args) {
-        emf = Persistence.createEntityManagerFactory("pu");
-        instance = getJokeFacade(emf);
-        System.out.println(instance.getRandomJoke().getJoke());
-    }
-    
+   
     
     public static JokeFacade getJokeFacade(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -60,11 +54,22 @@ public class JokeFacade {
     }
     
     public Joke getRandomJoke() {
-        List<Joke> referenceList = getAllJokes();
         Random random = new Random();
-        int randomID = random.nextInt(referenceList.size());
-        randomID += 1; // +1 so it starts from 1.
-        return getJokeByID(randomID);
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery query =
+                    em.createNamedQuery("Joke.getAllJokes", Joke.class);
+            TypedQuery query2 =
+                    em.createNamedQuery("Joke.getCount", Joke.class);
+        long count = (long) query2.getSingleResult();
+        int randomNumber = random.nextInt((int) count);
+        
+        query.setFirstResult(randomNumber);
+        query.setMaxResults(1);
+        return (Joke) query.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
 }

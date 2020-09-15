@@ -35,7 +35,14 @@ public class JokeFacadeTest {
        j1 = new Joke("What's the best thing about Switzerland?", "I don't know, but the flag is a big plus", "Family-friendly", 5);
        j2 = new Joke("What's a quick way to get rid of a cold?", "Just stand in a corner, it's 90 degrees", "Math joke", 7);
        j3 = new Joke("Have you heard about the new restaurant called Karma?", "There's no menu; you get what you deserve", "Deadpan", 8);
-       
+    }
+
+    @AfterAll
+    public static void tearDownClass() {
+    }
+
+    @BeforeEach
+    public void setUp() {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -46,14 +53,6 @@ public class JokeFacadeTest {
         } finally {
             em.close();
         }
-    }
-
-    @AfterAll
-    public static void tearDownClass() {
-    }
-
-    @BeforeEach
-    public void setUp() {
     }
 
     @AfterEach

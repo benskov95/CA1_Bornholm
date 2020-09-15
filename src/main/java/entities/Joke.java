@@ -13,7 +13,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries ({
 @NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke"),
 @NamedQuery(name = "Joke.getAllJokes", query = "SELECT j from Joke j"),
-@NamedQuery(name = "Joke.getByID", query = "SELECT j FROM Joke j WHERE j.id = :id")
+@NamedQuery(name = "Joke.getByID", query = "SELECT j FROM Joke j WHERE j.id = :id"),
+@NamedQuery(name = "Joke.getCount", query = "SELECT COUNT(j) FROM Joke j")
 })
 public class Joke implements Serializable {
 
