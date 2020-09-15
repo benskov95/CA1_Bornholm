@@ -19,9 +19,7 @@ public class JokeFacadeTest {
 
     private static EntityManagerFactory emf;
     private static JokeFacade facade;
-    private static Joke j1;
-    private static Joke j2;
-    private static Joke j3;
+    private static Joke j1, j2, j3;
 
     public JokeFacadeTest() {
     }
@@ -46,6 +44,7 @@ public class JokeFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
             em.persist(j1);
             em.persist(j2);
             em.persist(j3);
@@ -77,6 +76,15 @@ public class JokeFacadeTest {
         Joke joke = facade.getRandomJoke();
         int mustContainSomething = 5;
         assertTrue(joke.getJoke().length() > mustContainSomething);
+    }
+    
+    @Test
+    public void testPopulateJokeTable() {
+        int before = facade.getAllJokes().size();
+        facade.populateJokeTable();
+        before += 3;
+        int after = facade.getAllJokes().size();
+        assertTrue(after == before);
     }
 
 }

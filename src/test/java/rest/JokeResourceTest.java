@@ -19,13 +19,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-//Uncomment the line below, to temporarily disable this test
-@Disabled
+
+//@Disabled
 public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Joke r1,r2;
+    private static Joke j1, j2, j3;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -38,12 +38,10 @@ public class JokeResourceTest {
 
     @BeforeAll
     public static void setUpClass() {
-        //This method must be called before you request the EntityManagerFactory
         EMF_Creator.startREST_TestWithDB();
         emf = EMF_Creator.createEntityManagerFactoryForTest();
         
         httpServer = startServer();
-        //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;
         RestAssured.port = SERVER_PORT;
         RestAssured.defaultParser = Parser.JSON;
@@ -51,24 +49,22 @@ public class JokeResourceTest {
     
     @AfterAll
     public static void closeTestServer(){
-        //System.in.read();
-         //Don't forget this, if you called its counterpart in @BeforeAll
          EMF_Creator.endREST_TestWithDB();
          httpServer.shutdownNow();
     }
-    
-    // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
-    //TODO -- Make sure to change the EntityClass used below to use YOUR OWN (renamed) Entity class
+
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-//        r1 = new Joke("Some txt","More text");
-//        r2 = new Joke("aaa","bbb");
+        j1 = new Joke("What's the best thing about Switzerland?", "I don't know, but the flag is a big plus", "Family-friendly", 5);
+        j2 = new Joke("What's a quick way to get rid of a cold?", "Just stand in a corner, it's 90 degrees", "Math joke", 7);
+        j3 = new Joke("Have you heard about the new restaurant called Karma?", "There's no menu; you get what you deserve", "Deadpan", 8);
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2); 
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            em.persist(j1);
+            em.persist(j2);
+            em.persist(j3);
             em.getTransaction().commit();
         } finally { 
             em.close();
@@ -81,24 +77,5 @@ public class JokeResourceTest {
         given().when().get("/xxx").then().statusCode(200);
     }
    
-    //This test assumes the database contains two rows
-    @Test
-    public void testDummyMsg() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("/xxx/").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("msg", equalTo("Hello World"));   
-    }
-    
-    @Test
-    public void testCount() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("/xxx/count").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("count", equalTo(2));   
-    }
+
 }

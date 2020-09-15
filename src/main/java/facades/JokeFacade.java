@@ -71,5 +71,21 @@ public class JokeFacade {
             em.close();
         }
     }
+    
+    public void populateJokeTable() {
+       Joke j1 = new Joke("What is the best thing about Switzerland?", "I do not know, but the flag is a big plus", "Family-friendly", 5);
+       Joke j2 = new Joke("What is a quick way to get rid of a cold?", "Just stand in a corner, it is 90 degrees", "Math joke", 7);
+       Joke j3 = new Joke("Have you heard about the new restaurant called Karma?", "There is no menu; you get what you deserve", "Deadpan", 8);
+       EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(j1);
+            em.persist(j2);
+            em.persist(j3);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 
 }
