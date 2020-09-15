@@ -5,38 +5,48 @@
 let url = "http://localhost:8080/jpareststarter/api/joke/";
 
     
-let controller = document.getElementById("controller");
 let table = document.getElementById("fortable");
+let jokeP = document.getElementById("joke");
 let buttons = document.querySelectorAll("input.options");
-let viewAllNoDto = false;
+let singleJoke = false;
 
 buttons.forEach(function(element) {
-    element.addEventListener("click", fetchJokes, false);
+    element.addEventListener("click", fetchJokes);
 });
 
-function createTableHeadForAll() {
+function createTableHeads() {
  let tableStart = "<table class=\"table\">";
  tableStart += "<tr><th>Joke</th><th>Punchline</th></tr>";
  return tableStart;
 }
 
 function toTable(fetchedJokes) {
-    let tableString = createTableHeadForAll();
-    let jokes = fetchedJokes.map(joke => "<tr><td>" + joke.joke + "</td><td>" + joke.punchLine + "</td></tr>");
-    tableString += "</tr>" + jokes + "</table>";
+    let tableString = createTableHeads();
+    fetchedJokes.forEach(joke =>
+    tableString += "<tr><td>" + joke.joke
+            + "</td><td>" + joke.punchLine + "</td></tr>");
+    tableString += "</table>";
     table.innerHTML = tableString;
+    jokeP.innerHTML = "";
+}
+
+function toParagraph(fetchedJoke) {
+    jokeP.innerHTML = fetchedJoke.joke + "<br><br>" + fetchedJoke.punchLine;
+    table.innerHTML = "";
 }
 
 function determineEndpoint(element) {
-    var input = document.getElementById("input");
+    let input = document.getElementById("input");
     
     if (element.id === "getAll") {
         return "all";
     }
-    if (element.id === "getById") {
+    if (element.id === "getByID") {
+        singleJoke = true;
         return "by_id/" + input.value;
     }
     if (element.id === "getRandom") {
+        singleJoke = true;
         return "random";
     }
 }
@@ -44,7 +54,7 @@ function determineEndpoint(element) {
 function fetchJokes() {
     event.preventDefault();
     event.stopPropagation();
-    var choice = document.getElementById(event.target.id);
+    let choice = document.getElementById(event.target.id);
     tempUrl = url;
     
    tempUrl += determineEndpoint(choice);
@@ -52,6 +62,21 @@ function fetchJokes() {
    fetch(tempUrl) 
   .then(res => res.json()) 
   .then(jokes => {
+      if (singleJoke) {
+          toParagraph(jokes);
+          singleJoke = false;
+      } else {
+      toTable(jokes);
+  }
+    });
+}
+
+function loadPage() {
+    fetch(url + "all") 
+  .then(res => res.json()) 
+  .then(jokes => {
       toTable(jokes);
     });
 }
+
+loadPage();
