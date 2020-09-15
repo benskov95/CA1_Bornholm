@@ -1,8 +1,8 @@
 // REMOTE URL
-//let url = "https://bencat.dk/movieproject/api/movie/";
+let url = "https://bencat.dk/CA1_Bornholm/api/joke/";
 
 // LOCAL URL
-let url = "http://localhost:8080/jpareststarter/api/joke/";
+//let url = "http://localhost:8080/jpareststarter/api/joke/";
 
     
 let table = document.getElementById("fortable");
