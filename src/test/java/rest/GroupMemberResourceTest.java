@@ -1,6 +1,6 @@
 package rest;
 
-import entities.Member;
+import entities.GroupMember;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -22,14 +22,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
 
-public class MemberResourceTest {
+//@Disabled
+public class GroupMemberResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Member m1 = new Member("Hans Hansen", "hh-111", "Powerpuff Girls");
-    private static Member m2 = new Member("Jens Jensen", "jj-222", "Samurai Jack");
+    private static GroupMember m1 = new GroupMember("Hans Hansen", "hh-111", "Powerpuff Girls");
+    private static GroupMember m2 = new GroupMember("Jens Jensen", "jj-222", "Samurai Jack");
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -69,7 +69,7 @@ public class MemberResourceTest {
 
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Member.deleteAllRows").executeUpdate();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
             em.persist(m1);
             em.persist(m2);
             em.getTransaction().commit();

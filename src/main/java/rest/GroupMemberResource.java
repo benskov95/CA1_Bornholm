@@ -2,8 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.MemberDTO;
-import entities.Member;
+import dto.GroupMemberDTO;
+import entities.GroupMember;
+import entities.Joke;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
@@ -11,14 +12,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import utils.EMF_Creator;
-import facades.MemberFacade;
+import facades.GroupMemberFacade;
 import javax.ws.rs.PathParam;
 
 @Path("groupmembers")
-public class MemberResource {
+public class GroupMemberResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final MemberFacade FACADE = MemberFacade.getMemberFacade(EMF);
+    private static final GroupMemberFacade FACADE = GroupMemberFacade.getMemberFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
@@ -30,9 +31,9 @@ public class MemberResource {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllMoviesNoDTO() {
+    public String getAllMembersNoDTO() {
         try {
-            List<Member> members = FACADE.getAllMembers();
+            List<GroupMember> members = FACADE.getAllMembers();
             return new Gson().toJson(members);
         } catch (Exception e) {
             return "Error: Not able to retrieve list of members";
@@ -42,12 +43,26 @@ public class MemberResource {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getMovieById(@PathParam("id") String studentId) {
+    public String getMemberByID(@PathParam("id") String studentId) {
         try {
-            MemberDTO memberDTO = new MemberDTO(FACADE.getMemberByStudentId(studentId));
+            GroupMemberDTO memberDTO = new GroupMemberDTO(FACADE.getMemberByStudentId(studentId));
             return new Gson().toJson(memberDTO);
         } catch (Exception e) {
             return "Error: Not able to find or retrieve member";
         }
+    }
+    
+     @GET
+    @Path("/populate")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String populateJokeTable() {
+//        try {
+            FACADE.populateDB();
+            List<GroupMember> members = FACADE.getAllMembers();
+            String jsonString = GSON.toJson("Added members to DB:\n" + members);
+            return jsonString;
+//        } catch (Exception e) {
+//            return "ERROR: Something went wrong.";
+//        }
     }
 }

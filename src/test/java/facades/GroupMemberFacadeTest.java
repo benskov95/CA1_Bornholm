@@ -1,7 +1,7 @@
 package facades;
 
 import utils.EMF_Creator;
-import entities.Member;
+import entities.GroupMember;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,24 +10,25 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class MemberFacadeTest {
+public class GroupMemberFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static MemberFacade facade;
-    private static Member m1 = new Member("Peter Petersen", "pp-333", "Dexters Laboratorium");
-    private static Member m2 = new Member("Lars Larsen", "ll-444", "Johnny Bravo");
+    private static GroupMemberFacade facade;
+    private static GroupMember m1 = new GroupMember("Peter Petersen", "pp-333", "Dexters Laboratorium");
+    private static GroupMember m2 = new GroupMember("Lars Larsen", "ll-444", "Johnny Bravo");
 
-    public MemberFacadeTest() {
+    public GroupMemberFacadeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        facade = MemberFacade.getMemberFacade(emf);
+        facade = GroupMemberFacade.getMemberFacade(emf);
     }
 
     @AfterAll
@@ -42,7 +43,7 @@ public class MemberFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Member.deleteAllRows").executeUpdate();
+            em.createNamedQuery("GroupMember.deleteAllRows").executeUpdate();
             em.persist(m1);
             em.persist(m2);
             em.getTransaction().commit();
@@ -58,28 +59,28 @@ public class MemberFacadeTest {
 
     @Test
     public void testGetAllMembers() {
-        List<Member> members = facade.getAllMembers();
+        List<GroupMember> members = facade.getAllMembers();
         assertEquals(2, members.size());
     }
 
     @Test
     public void testGetMemberById() {
         int id = m1.getId();
-        Member member = facade.getMemberById(id);
+        GroupMember member = facade.getMemberById(id);
         assertEquals(m1.getName(), member.getName());
     }
 
     @Test
     public void testGetMemberByStudentId() {
         String studentId = m1.getStudentId();
-        Member member = facade.getMemberByStudentId(studentId);
+        GroupMember member = facade.getMemberByStudentId(studentId);
         assertEquals(m1.getName(), member.getName());
     }
 
     @Test
     public void testGetMemberByName() {
         String name = m1.getName();
-        List<Member> members = facade.getMemberByName(name);
+        List<GroupMember> members = facade.getMemberByName(name);
         assertEquals(name, members.get(0).getName());
     }
 

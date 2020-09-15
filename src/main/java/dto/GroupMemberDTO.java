@@ -1,13 +1,13 @@
 package dto;
 
-import entities.Member;
+import entities.GroupMember;
 
-public class MemberDTO {
+public class GroupMemberDTO {
 
     private String name;
     private String studentId;
 
-    public MemberDTO(Member member) {
+    public GroupMemberDTO(GroupMember member) {
         this.name = member.getName();
         this.studentId = member.getStudentId();
     }

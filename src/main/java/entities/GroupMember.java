@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
-public class Member implements Serializable {
+@NamedQuery (name = "GroupMember.deleteAllRows", query = "DELETE FROM GroupMember")
+public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -17,13 +19,13 @@ public class Member implements Serializable {
     private String studentId;
     private String favoriteSeries;
 
-    public Member(String name, String studentId, String favoriteSeries) {
+    public GroupMember(String name, String studentId, String favoriteSeries) {
         this.name = name;
         this.studentId = studentId;
         this.favoriteSeries = favoriteSeries;
     }
 
-    public Member() {
+    public GroupMember() {
     }
 
     public String getName() {
