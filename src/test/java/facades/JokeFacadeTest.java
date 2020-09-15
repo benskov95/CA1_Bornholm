@@ -24,8 +24,7 @@ public class JokeFacadeTest {
     public JokeFacadeTest() {
     }
 
-    /* moved test joke creation up here because creating new jokes
-        for each test method made the getRandom() method not work. */
+   // Don't know why there are errors on JokeFacade objects, tests still work both locally and on Travis.
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
