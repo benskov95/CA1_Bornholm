@@ -75,4 +75,10 @@ public class JokeResource {
             return "ERROR: Something went wrong.";
         }
     }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String demo() {
+        return "{\"msg\":\"Hello World\"}";
+    }
 }

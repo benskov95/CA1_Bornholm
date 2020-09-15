@@ -1,12 +1,10 @@
 package facades;
 
-import dto.JokeDTO;
 import entities.Joke;
 import java.util.List;
 import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 public class JokeFacade {

@@ -14,6 +14,13 @@ import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.notNullValue;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,8 +81,39 @@ public class JokeResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/xxx").then().statusCode(200);
+        given().when().get("/joke").then().statusCode(200);
     }
-   
-
+    
+    @Test
+    public void testGetAllJokes() {
+        given()
+        .contentType("application/json")
+        .get("/joke/all").then()
+        .assertThat()
+        .statusCode(HttpStatus.OK_200.getStatusCode())
+        .body("size()", is(3))
+        .and()
+        .body("punchLine", hasItems("I don't know, but the flag is a big plus", "Just stand in a corner, it's 90 degrees", "There's no menu; you get what you deserve"));
+    }
+    
+    @Test
+    public void testGetJokeByID() {
+        int id = j1.getId();
+        given()
+         .contentType("application/json")
+         .get("/joke/by_id/{id}", id)
+         .then().assertThat()
+         .statusCode(HttpStatus.OK_200.getStatusCode())
+         .body("joke", equalTo(j1.getJoke()));
+    }
+    
+    @Test
+    public void testGetRandomJoke() {
+        given()
+         .contentType("application/json")
+         .get("/joke/random")
+         .then().assertThat()
+         .statusCode(HttpStatus.OK_200.getStatusCode())
+         .body("punchLine", notNullValue());
+    }
 }
