@@ -31,7 +31,7 @@ function toTable(fetchedJokes) {
 }
 
 function toParagraph(fetchedJoke) {
-    jokeP.innerHTML = fetchedJoke.joke + "<br><br>" + fetchedJoke.punchLine;
+    jokeP.innerHTML = fetchedJoke.joke + "<br>" + fetchedJoke.punchLine;
     table.innerHTML = "";
 }
 
