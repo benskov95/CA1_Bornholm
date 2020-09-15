@@ -2,8 +2,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CarDTO;
 import utils.EMF_Creator;
 import facades.CarFacade;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -33,5 +35,13 @@ public class CarResource {
         
         return "DB Populated";
         
+    }
+    
+    @GET
+    @Path("all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllCars() {
+        List<CarDTO> carDTOlist = FACADE.getAllCars();
+        return GSON.toJson(carDTOlist);
     }
 }

@@ -7,6 +7,7 @@ package facades;
 
 import dto.CarDTO;
 import entities.Car;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,14 +35,13 @@ public class CarFacade {
         return emf.createEntityManager();
     }
 
-    public static List<CarDTO> getAllCars () {
+    public List<CarDTO> getAllCars () {
         
         EntityManager em = emf.createEntityManager();
         
         Query query = em.createQuery("SELECT c FROM Car c");
         List<Car> carslist = query.getResultList();
-        
-        List<CarDTO> carDTOlist = null;
+        List<CarDTO> carDTOlist = new ArrayList<>();
         
         for (Car cars : carslist) {
             carDTOlist.add(new CarDTO(cars));
