@@ -34,7 +34,7 @@ public class GroupMemberResource {
     public String getAllMembersNoDTO() {
         try {
             List<GroupMember> members = FACADE.getAllMembers();
-            return new Gson().toJson(members);
+            return GSON.toJson(members);
         } catch (Exception e) {
             return "Error: Not able to retrieve list of members";
         }
