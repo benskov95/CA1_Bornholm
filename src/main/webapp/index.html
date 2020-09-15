@@ -3,8 +3,31 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Change or remove this page</h1>
+
+        <div class="container">
+            <h1><b>BornIT (Group 8)</b></h1>
+            <h3><b>Class D - Bornholm</b></h3>
+            <h4><b>Members (loaded from a REST API)</b></h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Names</th>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Favorite TV Series</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button id="getAllMembersBtn">Reload Names</button>
+            <br><br>
+            <h4><b>Links</b></h4>
+            <ul><li><a href="#">Who did what + group contract</a></li><li><a href="#">Jokes page</a></li><li><a href="#">Our GitHub repo</a></li><li><a href="#">Cars for sale page</a></li></ul>
+        </div>
+
+        <script scr="fetchmembers.js"></script>
     </body>
 </html>
