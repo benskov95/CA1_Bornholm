@@ -56,7 +56,8 @@ public class JokeResource {
     public String getRandomJoke() {
         try {
             Joke joke = FACADE.getRandomJoke();
-            String jsonString = GSON.toJson(joke);
+            JokeDTO jokeDTO = new JokeDTO(joke);
+            String jsonString = GSON.toJson(jokeDTO);
             return jsonString;
         } catch (Exception e) {
             return "ERROR: Something went wrong.";
