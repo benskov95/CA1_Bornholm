@@ -27,7 +27,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-//@Disabled
+@Disabled
 public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
