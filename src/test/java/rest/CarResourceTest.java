@@ -1,7 +1,6 @@
 package rest;
 
 import entities.Car;
-import entities.Joke;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -10,6 +9,7 @@ import java.net.URI;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
+import static org.eclipse.persistence.expressions.ExpressionOperator.and;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -69,6 +69,7 @@ public class CarResourceTest {
 
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
             em.persist(car1);
             em.persist(car2);
 
@@ -103,9 +104,9 @@ public class CarResourceTest {
         .get("car/all").then()
         .assertThat()
         .statusCode(200)
-        .body("make", hasItems("Ford", "Chevy"));
-        //.and()
-        //.body("size()",is(2));
+        .body("make", hasItems("Ford", "Chevy"))
+        .and()
+        .body("size()",is(2));
         
                 
            
