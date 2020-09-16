@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.GroupMemberDTO;
 import entities.GroupMember;
-import entities.Joke;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
@@ -34,7 +33,7 @@ public class GroupMemberResource {
     public String getAllMembersNoDTO() {
         try {
             List<GroupMember> members = FACADE.getAllMembers();
-            return new Gson().toJson(members);
+            return GSON.toJson(members);
         } catch (Exception e) {
             return "Error: Not able to retrieve list of members";
         }
@@ -55,14 +54,14 @@ public class GroupMemberResource {
      @GET
     @Path("/populate")
     @Produces({MediaType.APPLICATION_JSON})
-    public String populateJokeTable() {
-//        try {
+    public String populateGroupMemberTable() {
+        try {
             FACADE.populateDB();
             List<GroupMember> members = FACADE.getAllMembers();
             String jsonString = GSON.toJson("Added members to DB:\n" + members);
             return jsonString;
-//        } catch (Exception e) {
-//            return "ERROR: Something went wrong.";
-//        }
+        } catch (Exception e) {
+            return "ERROR: Something went wrong.";
+        }
     }
 }

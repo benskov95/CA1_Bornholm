@@ -26,7 +26,7 @@ public class JokeResource {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllMovies() {
+    public String getAllJokes() {
         try {
             List<Joke> jokes = FACADE.getAllJokes();
             String jsonString = GSON.toJson(JokeDTO.listToDTO(jokes));
@@ -39,10 +39,11 @@ public class JokeResource {
     @GET
     @Path("/by_id/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getMovieByID(@PathParam("id") int id) {
+    public String getJokeByID(@PathParam("id") int id) {
         try {
             Joke joke = FACADE.getJokeByID(id);
-            String jsonString = GSON.toJson(joke);
+            JokeDTO jokeDTO = new JokeDTO(joke);
+            String jsonString = GSON.toJson(jokeDTO);
             return jsonString;
         } catch (Exception e) {
             return "ERROR: The movie with the specified ID (" + id + ") does not exist.";
@@ -52,7 +53,7 @@ public class JokeResource {
     @GET
     @Path("/random")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getMovieByID() {
+    public String getRandomJoke() {
         try {
             Joke joke = FACADE.getRandomJoke();
             String jsonString = GSON.toJson(joke);

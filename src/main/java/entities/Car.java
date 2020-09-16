@@ -11,13 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Tha-Y
- */
+@NamedQuery (name = "Car.deleteAllRows", query = "DELETE FROM Car")
 @Entity
 public class Car implements Serializable {
 
