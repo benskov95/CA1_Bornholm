@@ -28,8 +28,8 @@ public class JokeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllJokes() {
         try {
-            List<Joke> jokes = FACADE.getAllJokes();
-            String jsonString = GSON.toJson(JokeDTO.listToDTO(jokes));
+            List<JokeDTO> jokes = FACADE.getAllJokes();
+            String jsonString = GSON.toJson(jokes);
             return jsonString;
         } catch (Exception e) {
             return "ERROR: Something went wrong.";
@@ -41,9 +41,8 @@ public class JokeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getJokeByID(@PathParam("id") int id) {
         try {
-            Joke joke = FACADE.getJokeByID(id);
-            JokeDTO jokeDTO = new JokeDTO(joke);
-            String jsonString = GSON.toJson(jokeDTO);
+            JokeDTO joke = FACADE.getJokeByID(id);
+            String jsonString = GSON.toJson(joke);
             return jsonString;
         } catch (Exception e) {
             return "ERROR: The movie with the specified ID (" + id + ") does not exist.";
@@ -55,9 +54,8 @@ public class JokeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getRandomJoke() {
         try {
-            Joke joke = FACADE.getRandomJoke();
-            JokeDTO jokeDTO = new JokeDTO(joke);
-            String jsonString = GSON.toJson(jokeDTO);
+            JokeDTO joke = FACADE.getRandomJoke();
+            String jsonString = GSON.toJson(joke);
             return jsonString;
         } catch (Exception e) {
             return "ERROR: Something went wrong.";
@@ -70,8 +68,7 @@ public class JokeResource {
     public String populateJokeTable() {
         try {
             FACADE.populateJokeTable();
-            List<Joke> jokes = FACADE.getAllJokes();
-            String jsonString = GSON.toJson("Added 3 jokes to DB:\n" + jokes);
+            String jsonString = GSON.toJson("Added 3 jokes to DB");
             return jsonString;
         } catch (Exception e) {
             return "ERROR: Something went wrong.";
