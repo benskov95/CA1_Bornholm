@@ -5,10 +5,11 @@ getAllMembersBtn.addEventListener('click', (event) => {
 });
 
 function fetchAllMembers() {
-    let url = 'https://bencat.dk/CA1_Bornholm/api/groupmembers/all';
-    let allMembers = document.getElementById("allMembers");
+    let url = 'http://localhost:8080/jpareststarter/api/groupmembers/all';
+    let membersTable = document.getElementById("membersTable");
     fetch(url).then(res => res.json()).then(data => {
         let membersArray = data.map(member => `<tr><td>${member.name}</td><td>${member.studentId}</td><td>${member.favoriteSeries}</td></tr>`);
-        allMembers.innerHTML = `<table><thead><th>Names</th><th>Student ID</th><th>Favorite TV Series</th></thead>${membersArray.join("")}</table>`
+        membersTable.innerHTML = membersArray.join("");
     });
 }
+    fetchAllMembers();
