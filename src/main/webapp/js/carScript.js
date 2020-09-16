@@ -9,7 +9,8 @@ document.getElementById("btn4").addEventListener("click", filterCars);
 document.getElementById("sort").addEventListener("click", sortBy);
 function fetchallCars() {
 
-    let url = 'http://localhost:8080/jpareststarter/api/car/all';
+//    let url = 'http://localhost:8080/jpareststarter/api/car/all';
+    let url = "https://bencat.dk/CA1_Bornholm/api/car/all";
 
     fetch(url)
             .then(res => res.json()) //in flow1, just do it
