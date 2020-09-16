@@ -55,13 +55,9 @@ public class GroupMemberResource {
     @Path("/populate")
     @Produces({MediaType.APPLICATION_JSON})
     public String populateGroupMemberTable() {
-        try {
             FACADE.populateDB();
             List<GroupMember> members = FACADE.getAllMembers();
             String jsonString = GSON.toJson("Added members to DB:\n" + members);
             return jsonString;
-        } catch (Exception e) {
-            return "ERROR: Something went wrong.";
-        }
     }
 }
