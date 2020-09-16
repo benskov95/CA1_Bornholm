@@ -21,5 +21,23 @@ public class JokeDTO {
         });
         return dtoJokes;
     }
+
+    public String getJoke() {
+        return joke;
+    }
+
+    public void setJoke(String joke) {
+        this.joke = joke;
+    }
+
+    public String getPunchLine() {
+        return punchLine;
+    }
+
+    public void setPunchLine(String punchLine) {
+        this.punchLine = punchLine;
+    }
+    
+    
     
 }
