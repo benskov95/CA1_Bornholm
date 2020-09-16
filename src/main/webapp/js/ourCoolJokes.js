@@ -55,7 +55,7 @@ function fetchJokes() {
     event.preventDefault();
     event.stopPropagation();
     let choice = document.getElementById(event.target.id);
-    tempUrl = url;
+    let tempUrl = url; 
     
    tempUrl += determineEndpoint(choice);
     

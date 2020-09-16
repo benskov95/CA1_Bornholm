@@ -1,4 +1,4 @@
-let getAllMembersBtn = document.getElementById(getAllMembersBtn);
+let getAllMembersBtn = document.getElementById("getAllMembersBtn");
 getAllMembersBtn.addEventListener('click', (event) => {
     event.preventDefault();
     fetchAllMembers();
