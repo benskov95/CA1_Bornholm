@@ -1,0 +1,19 @@
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #33adff;
+  color: black;
+}
+
+.previous {
+  background-color: #99d6ff;
+  color: black;
+}
+
+.round {
+  border-radius: 50%;
+}
