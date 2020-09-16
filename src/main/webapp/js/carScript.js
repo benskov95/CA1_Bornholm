@@ -24,9 +24,7 @@ function fetchallCars() {
 }
 function maketable(array) {
 
-    let carsarray = array.map(cars => `<tr><td></td><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}`);
-
-
+    let carsarray = array.map(cars => `<tr><td></td><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}</tr>`);
     document.getElementById("tablebody").innerHTML = carsarray.join("");
 }
 function sortBy() {
@@ -34,7 +32,6 @@ function sortBy() {
     let buttonpressed = event.target.innerText;
     switch (buttonpressed) {
         case "year":
-            console.log("year")
             let yearArray = cararray.sort(function (a, b) {
                 return a.year - b.year;
             });
@@ -43,20 +40,31 @@ function sortBy() {
 
         case "make":
             let makeArray = cararray.sort(function (a, b) {
-                return a.make > b.make;
+                if (a.make < b.make) {
+                    return -1;
+                }
+                if (a.make > b.make) {
+                    return 1;
+                }
+                return 0;
             });
             maketable(makeArray);
             break;
             
             case "model":
             let modelArray = cararray.sort(function (a, b) {
-                return a.model > b.model;
+                if (a.model < b.model) {
+                    return -1;
+                }
+                if (a.model > b.model) {
+                    return 1;
+                }
+                return 0;
             });
             maketable(modelArray);
             break;
             
         case "price":
-            console.log("price")
             let priceArray = cararray.sort(function (a, b) {
                 return a.price - b.price;
             });
@@ -80,17 +88,20 @@ function filterCars() {
     switch (buttonPressed.id) {
         case "btn1":
             let filterPrice = cararray.filter(x => x.price < input);
+            cararray = filterPrice;
             maketable(filterPrice);
             break;
 
 
         case "btn2":
             let filterYear = cararray.filter(x => x.year <= input);
+            cararray = filterYear;
             maketable(filterYear);
             break;
 
         case "btn3":
             let filterMake = cararray.filter(x => x.make.toLowerCase() === input.toLowerCase());
+            cararray = filterMake;
             maketable(filterMake);
             break;
 

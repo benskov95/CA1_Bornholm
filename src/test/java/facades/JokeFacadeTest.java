@@ -25,7 +25,6 @@ public class JokeFacadeTest {
     public JokeFacadeTest() {
     }
 
-   // Don't know why there are errors on JokeFacade objects, tests still work both locally and on Travis.
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
