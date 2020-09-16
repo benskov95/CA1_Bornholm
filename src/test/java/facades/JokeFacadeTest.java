@@ -2,6 +2,7 @@ package facades;
 
 import utils.EMF_Creator;
 import entities.Joke;
+import dto.JokeDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,7 +25,6 @@ public class JokeFacadeTest {
     public JokeFacadeTest() {
     }
 
-   // Don't know why there are errors on JokeFacade objects, tests still work both locally and on Travis.
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
@@ -60,19 +60,19 @@ public class JokeFacadeTest {
     @Test
     public void testGetAllJokes() {
         int expectedSize = 3;
-        List<Joke> jokes = facade.getAllJokes();
+        List<JokeDTO> jokes = facade.getAllJokes();
         assertEquals(expectedSize, jokes.size());
     }
     
     @Test
     public void testGetJokeByID() {
-        Joke joke = facade.getJokeByID(j1.getId());
+        JokeDTO joke = facade.getJokeByID(j1.getId());
         assertEquals(j1.getPunchLine(), joke.getPunchLine());
     }
     
     @Test
     public void testGetRandomJoke() {
-        Joke joke = facade.getRandomJoke();
+        JokeDTO joke = facade.getRandomJoke();
         int mustContainSomething = 5;
         assertTrue(joke.getJoke().length() > mustContainSomething);
     }

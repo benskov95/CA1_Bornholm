@@ -1,6 +1,7 @@
 package facades;
 
 import entities.Joke;
+import dto.JokeDTO;
 import java.util.List;
 import java.util.Random;
 import javax.persistence.EntityManager;
@@ -27,31 +28,31 @@ public class JokeFacade {
         return emf.createEntityManager();
     }
     
-    public List<Joke> getAllJokes() {
+    public List<JokeDTO> getAllJokes() {
         EntityManager em = getEntityManager();
         try {
             TypedQuery query =
                     em.createNamedQuery("Joke.getAllJokes", Joke.class);
-            return query.getResultList();
+            return JokeDTO.listToDTO(query.getResultList());
         } finally {
             em.close();
         }
     } 
     
-    public Joke getJokeByID(int id) {
+    public JokeDTO getJokeByID(int id) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery query = 
                     em.createNamedQuery("Joke.getByID", Joke.class);
             query.setParameter("id", id);
-            Joke joke = (Joke) query.getSingleResult();
+            JokeDTO joke = new JokeDTO((Joke) query.getSingleResult());
             return joke;
         } finally {
             em.close();
         }
     }
     
-    public Joke getRandomJoke() {
+    public JokeDTO getRandomJoke() {
         Random random = new Random();
         EntityManager em = getEntityManager();
         try {
@@ -64,7 +65,7 @@ public class JokeFacade {
         
         query.setFirstResult(randomNumber);
         query.setMaxResults(1);
-        return (Joke) query.getSingleResult();
+        return new JokeDTO((Joke) query.getSingleResult());
         } finally {
             em.close();
         }
