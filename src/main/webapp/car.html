@@ -6,39 +6,54 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Cars for Sale</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="css/styling.css">
     </head>
     <body>
-         <table class="table">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6" style="margin-left: auto; margin-right: auto; text-align: center">
+            <br>
+            <h1>Cars For Sale</h1>
+            <br>
+
+            <table class="table-col-12">
                 <thead id="sort">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">id</th>
-                        <th scope="col">year</th>
-                        <th scope="col">make</th>
-                        <th scope="col">model</th>
-                        <th scope="col">price</th>
+                        
+                        <th class="col-lg-1" scope="col">id</th>
+                        <th class="col-lg-1" scope="col">year</th>
+                        <th class="col-lg-2" scope="col">make</th>
+                        <th class="col-lg-2" scope="col">model</th>
+                        <th class="col-lg-3" scope="col">price</th>
+                        <th class="col-lg-3" scope="col">image</th>
                     </tr>
                 </thead>
                 <tbody id="tablebody">
-                    
-                    
+
+
                 </tbody>
             </table>
-        <input id="price" type="text">
-        <button id="btn1">Price less than</button>
-        <button id="btn2">Filter by Year</button>
-        <button id="btn3">Filter by Make</button>
-        <button id="btn4">Refresh</button>
-        
-        <br>
-        <br>
-        <a href="index.html" class="previous round">&#8249;</a>
-        
+            
+            <br>
+            <input id="price" type="text">
+            <br>
+            <br>
+            <button id="btn1">Price less than</button>
+            <button id="btn2">Filter by Year</button>
+            <button id="btn3">Filter by Make</button>
+            <button id="btn4">Refresh</button>
+
+            <br>
+            <br>
+            <a href="index.html" class="previous round">&#8249;</a>
+            <br>
+            <br>
+        </div>
+
     </body>
-    
-     <script src="js/carScript.js"></script>
+
+    <script src="js/carScript.js"></script>
 </html>
