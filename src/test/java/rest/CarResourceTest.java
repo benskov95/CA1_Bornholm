@@ -28,8 +28,8 @@ public class CarResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Car car1 = new Car(1997, "Ford", "E350", 3000, "Pelle Rasmussen");
-    private static Car car2 = new Car(1999, "Chevy", "Venture", 4900, "Mari Haugen");
+    private static Car car1 = new Car(1997, "Ford", "E350", 3000, "Pelle Rasmussen", 2);
+    private static Car car2 = new Car(1999, "Chevy", "Venture", 4900, "Mari Haugen", 2);
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;

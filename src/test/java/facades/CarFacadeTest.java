@@ -21,8 +21,8 @@ public class CarFacadeTest {
 
     private static EntityManagerFactory emf;
     private static CarFacade facade;
-    private static Car car1 = new Car(1997, "Ford", "E350", 3000, "Pelle Rasmussen");
-    private static Car car2 = new Car(1999, "Chevy", "Venture", 4900, "Mari Haugen");
+    private static Car car1 = new Car(1997, "Ford", "E350", 3000, "Pelle Rasmussen", 2);
+    private static Car car2 = new Car(1999, "Chevy", "Venture", 4900, "Mari Haugen", 2);
 
 
     public CarFacadeTest() {

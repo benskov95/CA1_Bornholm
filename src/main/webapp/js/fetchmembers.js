@@ -1,5 +1,6 @@
 let url = 'https://bencat.dk/CA1_Bornholm/api/groupmembers/all';
 // let url = 'http://localhost:8080/jpareststarter/api/groupmembers/all';
+ 
 let getAllMembersBtn = document.getElementById("getAllMembersBtn");
 getAllMembersBtn.addEventListener('click', (event) => {
     event.preventDefault();

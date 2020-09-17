@@ -16,6 +16,7 @@ public class CarDTO {
     private String make;
     private String model;
     private int price;
+    private int img;
     
     
     public CarDTO(Car car) {
@@ -24,6 +25,7 @@ public class CarDTO {
         this.make = car.getMake();
         this.model = car.getModel();
         this.price = car.getPrice();
+        this.img = car.getImg();
         
     }
 

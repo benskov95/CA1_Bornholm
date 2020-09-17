@@ -16,6 +16,7 @@ function fetchallCars() {
             .then(res => res.json()) //in flow1, just do it
             .then(data => {
                 maketable(data);
+                console.log(data);
                 cararray = [...data];
 
                 /* data now contains the response, converted to JavaScript
@@ -25,7 +26,7 @@ function fetchallCars() {
 }
 function maketable(array) {
 
-    let carsarray = array.map(cars => `<tr><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}</td><td><i><a target="_blank" href="images/${cars.id}.jpg"><img src="images/${cars.id}thumb.jpg" alt="${cars.make}">
+    let carsarray = array.map(cars => `<tr><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}</td><td><i><a target="_blank" href="images/${cars.img}.jpg"><img src="images/${cars.img}thumb.jpg" alt="${cars.make}">
 </a> </i></td></tr>`);
     document.getElementById("tablebody").innerHTML = carsarray.join("");
 }

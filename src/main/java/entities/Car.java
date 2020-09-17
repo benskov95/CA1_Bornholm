@@ -28,15 +28,17 @@ public class Car implements Serializable {
     private String model;
     private int price;
     private String owner;
+    private int img;
     @Temporal(TemporalType.DATE)
     private Date created;
 
-    public Car(int year, String make, String model, int price, String owner) {
+    public Car(int year, String make, String model, int price, String owner, int img) {
         this.year = year;
         this.make = make;
         this.model = model;
         this.price = price;
         this.owner = owner;
+        this.img = img;
         this.created = new Date();
     }
     public Car(){
@@ -101,8 +103,14 @@ public class Car implements Serializable {
         this.id = id;
     }
 
+    public int getImg() {
+        return img;
+    }
 
-
+    public void setImg(int img) {
+        this.img = img;
+    }
+    
 
     @Override
     public String toString() {

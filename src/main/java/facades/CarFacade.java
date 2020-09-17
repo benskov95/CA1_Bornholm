@@ -57,12 +57,12 @@ public class CarFacade {
        
        try{
           em.getTransaction().begin();
-          em.persist(new Car(1997,"Ford","E350",3000,"Pelle Rasmussen"));
-          em.persist(new Car(1999,"Chevy","Venture",4900,"Mari Haugen"));
-          em.persist(new Car(2000,"Chevy","Venture",5000,"John Snow"));
-          em.persist(new Car(1996,"Jeep","Grand Cherokee",4799,"Mari Haugen"));
-          em.persist(new Car(2005,"Volvo","V70",44799,"Martin Karlsen"));
-          em.persist(new Car(2018,"Tesla","S",65000,"Henning Madsen"));
+          em.persist(new Car(1997,"Ford","E350",3000,"Pelle Rasmussen", 5));
+          em.persist(new Car(1999,"Chevy","Venture",4900,"Mari Haugen", 1));
+          em.persist(new Car(2000,"Chevy","Venture",5000,"John Snow", 4));
+          em.persist(new Car(1996,"Jeep","Grand Cherokee",4799,"Mari Haugen", 3));
+          em.persist(new Car(2005,"Volvo","V70",44799,"Martin Karlsen", 2));
+          em.persist(new Car(2018,"Tesla","S",65000,"Henning Madsen", 6));
           em.getTransaction().commit();
            
        }finally{
