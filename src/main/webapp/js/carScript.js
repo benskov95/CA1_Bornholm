@@ -33,14 +33,14 @@ function sortBy() {
 
     let buttonpressed = event.target.innerText;
     switch (buttonpressed) {
-        case "year":
+        case "Year":
             let yearArray = cararray.sort(function (a, b) {
                 return a.year - b.year;
             });
             maketable(yearArray);
             break;
 
-        case "make":
+        case "Make":
             let makeArray = cararray.sort(function (a, b) {
                 if (a.make < b.make) {
                     return -1;
@@ -53,7 +53,7 @@ function sortBy() {
             maketable(makeArray);
             break;
             
-            case "model":
+            case "Model":
             let modelArray = cararray.sort(function (a, b) {
                 if (a.model < b.model) {
                     return -1;
@@ -66,7 +66,7 @@ function sortBy() {
             maketable(modelArray);
             break;
             
-        case "price":
+        case "Price":
             let priceArray = cararray.sort(function (a, b) {
                 return a.price - b.price;
             });

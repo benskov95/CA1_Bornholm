@@ -5,7 +5,7 @@ a {
 }
 
 a:hover {
-  background-color: #33adff;
+  background-color: #cccccc;
   color: black;
 }
 
@@ -16,4 +16,9 @@ a:hover {
 
 .round {
   border-radius: 50%;
+}
+
+.carHead:hover {
+    background-color: #cccccc;
+    
 }
