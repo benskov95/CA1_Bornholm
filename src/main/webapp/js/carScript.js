@@ -9,8 +9,8 @@ document.getElementById("btn4").addEventListener("click", filterCars);
 document.getElementById("sort").addEventListener("click", sortBy);
 function fetchallCars() {
 
-//    let url = 'http://localhost:8080/jpareststarter/api/car/all';
-    let url = "https://bencat.dk/CA1_Bornholm/api/car/all";
+    let url = 'http://localhost:8080/jpareststarter/api/car/all';
+   // let url = "https://bencat.dk/CA1_Bornholm/api/car/all";
 
     fetch(url)
             .then(res => res.json()) //in flow1, just do it
@@ -25,7 +25,8 @@ function fetchallCars() {
 }
 function maketable(array) {
 
-    let carsarray = array.map(cars => `<tr><td></td><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}</tr>`);
+    let carsarray = array.map(cars => `<tr><td>${cars.id}</td><td>${cars.year}</td><td>${cars.make}</td><td>${cars.model}</td><td>${cars.price}</td><td><i><a target="_blank" href="images/${cars.id}.jpg"><img src="images/${cars.id}thumb.jpg" alt="${cars.make}">
+</a> </i></td></tr>`);
     document.getElementById("tablebody").innerHTML = carsarray.join("");
 }
 function sortBy() {
